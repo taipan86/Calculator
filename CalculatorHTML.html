@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<link rel="stylesheet" href="CalculatorCSS.css" type="text/css">
+</head>
+<body>
+	<input type="text" id="oldValueInput" readonly>
+	<br>
+	<input type="number" id="currentValueInput" readonly>
+	<table>
+		<tr>
+	 		<td>
+	 			<button onclick="handlers.mcButton()">MC</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.mrButton()">MR</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.msButton()">MS</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.mplusButton()">M+</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.mminusButton()">M-</button>
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td>
+	 			<button onclick="handlers.delButton()">Del</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.ceButton()">CE</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.cButton()">C</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.negateButton()">+/-</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.sqrtButton()">SQRT</button>
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td>
+	 			<button onclick="handlers.numberButton(7)">7</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.numberButton(8)">8</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.numberButton(9)">9</button>
+	 		</td>
+	 		<td>
+	 			<button  onclick="handlers.operationButton('/')">/</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.percentageButton()">%</button>
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td>
+	 			<button onclick="handlers.numberButton(4)">4</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.numberButton(5)">5</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.numberButton(6)">6</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.operationButton('*')">*</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.reciprocButton()">1/x</button>
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td>
+	 			<button onclick="handlers.numberButton(1)">1</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.numberButton(2)">2</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.numberButton(3)">3</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.operationButton('-')">-</button>
+	 		</td>
+	 		<td rawspan="2">
+	 			<button onclick="handlers.equalButton()">=</button>
+	 		</td>
+	 	</tr>
+	 	<tr>
+	 		<td colspan="2">
+	 			<button onclick="handlers.numberButton(0)">0</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.numberButton('.')">.</button>
+	 		</td>
+	 		<td>
+	 			<button onclick="handlers.operationButton('+')">+</button>
+	 		</td>
+	 	</tr>
+	</table>
+    <p id="memoryExists">M</p>
+	<script type="text/javascript" src="CalculatorJS.js"></script>
+</body>
+</html>
