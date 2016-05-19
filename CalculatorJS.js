@@ -116,5 +116,6 @@ var handlers = {
 	percentageButton: function () {
 		handlers.currentValue.value = parseFloat(handlers.oldValue.value.substring
 			(0, handlers.oldValue.value.length-1)) * parseFloat(handlers.currentNumber) / 100;
+		handlers.currentNumber = "0";
 	}
 };
