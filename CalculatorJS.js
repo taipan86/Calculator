@@ -18,9 +18,7 @@ var handlers = {
 
 //2. butoanele + - / * 
 	operationButton: function (operationType) {
-		if (handlers.currentNumber === ""){
-		} 
-		else {
+		if (handlers.currentNumber){		 
 			handlers.oldValue.value = handlers.oldValue.value + handlers.currentValue.value + operationType;
 			handlers.currentNumber = "";
 		}
