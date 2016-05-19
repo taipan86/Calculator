@@ -1,104 +1,122 @@
-var currentValue = document.getElementById("currentValueInput");
-var currentNumber = "";
-var oldValue = document.getElementById("oldValueInput");
-var memory = 0;
-var memoryDisplay = document.getElementById("memoryExists");
-
+"use strict";
 //1. butoanele 0-9 
 
-handlers = {
+var handlers = {
+
+	currentValue: document.getElementById("currentValueInput"),
+	currentNumber: "",
+	oldValue: document.getElementById("oldValueInput"),
+	memory: 0,
+	memoryDisplay: document.getElementById("memoryExists"),
+	errorMessage: document.getElementById("divideBy0"),
+
 	numberButton: function (buttonValue) {
-			currentNumber = currentNumber+buttonValue;
-			currentValue.value = parseFloat(currentNumber);
+		handlers.errorMessage.style.display = "none";
+		handlers.currentNumber = handlers.currentNumber+buttonValue;
+		handlers.currentValue.value = parseFloat(handlers.currentNumber);
 	},
 
 //2. butoanele + - / * 
 	operationButton: function (operationType) {
-		if (currentNumber === ""){
+		if (handlers.currentNumber === ""){
 		} 
 		else {
-			oldValue.value = oldValue.value + currentValue.value + operationType;
-			currentNumber = "";
+			handlers.oldValue.value = handlers.oldValue.value + handlers.currentValue.value + operationType;
+			handlers.currentNumber = "";
 		}
 	},
 //3. butonul +/- 
 	negateButton: function () {
-		currentValue.value = -currentValue.value;
+		handlers.currentValue.value = -handlers.currentValue.value;
 	},
 //4. butonul SQRT
     sqrtButton: function (){
-    	currentValue.value = Math.sqrt(currentValue.value);
+    	if (isNaN(eval(handlers.oldValue.value))) {
+    		handlers.errorMessage.style.display = "block";
+    		handlers.oldValue.value = "";
+		handlers.currentNumber = "0";
+    	}
+    	else {
+    		handlers.currentValue.value = Math.sqrt(handlers.currentValue.value);
+    	};
     },
 
 //5. butonul 1/x	
 	reciprocButton: function (){
-		currentValue.value= 1/currentValue.value;
+		handlers.currentValue.value= 1/handlers.currentValue.value;
 	},
 
 //6. butonul = 
 	equalButton: function (){
-		oldValue.value = oldValue.value + currentValue.value;
-		currentValue.value = eval(oldValue.value);
-		oldValue.value = "";
-		currentNumber = "0";
+		handlers.oldValue.value = handlers.oldValue.value + handlers.currentValue.value;
+		if (eval(handlers.oldValue.value) === Infinity || 
+			eval(handlers.oldValue.value) === -Infinity) {
+			handlers.currentValue.value = "";
+			handlers.errorMessage.style.display = "block";
+		}
+		else {
+			handlers.currentValue.value = eval(handlers.oldValue.value);
+		}
+		handlers.oldValue.value = "";
+		handlers.currentNumber = "0";
 	},
 
 //7. butonul Del
 	delButton: function (){
-		currentNumber = currentNumber.substring(0, currentNumber.length-1);
-		currentValue.value = parseFloat(currentNumber);
+		handlers.currentNumber = handlers.currentNumber.substring(0, handlers.currentNumber.length-1);
+		handlers.currentValue.value = parseFloat(handlers.currentNumber);
 	},
 
-//8. butonul CE sa stearga tot ce e in currentNumber
+//8. butonul CE 
 	ceButton: function (){
-		currentValue.value = 0;
-		currentNumber = "";
+		handlers.currentValue.value = 0;
+		handlers.currentNumber = "";
 	},
 
-//9. butonul C sa stearga tot ce e in currentNumber si oldValue
+//9. butonul C
 	cButton: function (){
-		currentValue.value = 0;
-		oldValue.value = "";
-		currentNumber = "";
+		handlers.currentValue.value = 0;
+		handlers.oldValue.value = "";
+		handlers.currentNumber = "";
 	},
 
-//10. butonul MC sa stearga ce e in memory
+//10. butonul MC 
 	mcButton: function (){
-		memory = 0;
-		memoryDisplay.style.display = "none";
-		currentNumber = "0";
+		handlers.memory = 0;
+		handlers.memoryDisplay.style.display = "none";
+		handlers.currentNumber = "0";
 	},
 
-//11. butonul MR sa aduca in currentNumber ce e in memory
+//11. butonul MR 
 	mrButton: function (){
-		currentValue.value = memory;
-		currentNumber = "0";
+		handlers.currentValue.value = handlers.memory;
+		handlers.currentNumber = "0";
 	},
 
-//12. butonul MS sa puna in memory ce e in currentNumber
+//12. butonul MS 
 	msButton: function (){
-		memory = parseFloat(currentValue.value);
-		memoryDisplay.style.display = "block";
-		currentNumber = "0";
+		handlers.memory = parseFloat(handlers.currentValue.value);
+		handlers.memoryDisplay.style.display = "block";
+		handlers.currentNumber = "0";
 	},
 
-//13. butonul M+ sa adune la memory ce e in currentNumber
+//13. butonul M+
 	mplusButton: function (){
-		memory = memory + parseFloat(currentValue.value);
-		memoryDisplay.style.display = "block";
-		currentNumber = "0";
+		handlers.memory = handlers.memory + parseFloat(handlers.currentValue.value);
+		handlers.memoryDisplay.style.display = "block";
+		handlers.currentNumber = "0";
 	},
 
-//14. butonul M- sa scada din memory ce e in currentNumber
+//14. butonul M-
 	mminusButton: function (){
-		memory = memory - parseFloat(currentValue.value);
-		memoryDisplay.style.display = "block";
-		currentNumber = "0";
+		handlers.memory = handlers.memory - parseFloat(handlers.currentValue.value);
+		handlers.memoryDisplay.style.display = "block";
+		handlers.currentNumber = "0";
 	},
 
 //15. butonul %
 	percentageButton: function () {
-		currentValue.value = parseFloat(oldValue.value.substring
-			(0, oldValue.value.length-1)) * parseFloat(currentNumber) / 100;
+		handlers.currentValue.value = parseFloat(handlers.oldValue.value.substring
+			(0, handlers.oldValue.value.length-1)) * parseFloat(handlers.currentNumber) / 100;
 	}
 };
